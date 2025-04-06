@@ -9,7 +9,6 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
     private lateinit var operationText: TextView
     private lateinit var resultText: TextView
 
-    // Number buttons
     private lateinit var btnZero: TextView
     private lateinit var btnOne: TextView
     private lateinit var btnTwo: TextView
@@ -21,7 +20,6 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
     private lateinit var btnEight: TextView
     private lateinit var btnNine: TextView
 
-    // Operation buttons
     private lateinit var btnAdd: TextView
     private lateinit var btnSubtract: TextView
     private lateinit var btnMultiply: TextView
@@ -30,7 +28,6 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
     private lateinit var btnDecimal: TextView
     private lateinit var btnToggleSign: TextView
 
-    // Control buttons
     private lateinit var btnClear: TextView
     private lateinit var btnCE: TextView
     private lateinit var btnBackspace: TextView
@@ -45,11 +42,9 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.linearlayout)
 
-        // Initialize views
         operationText = findViewById(R.id.operation)
         resultText = findViewById(R.id.result)
 
-        // Number buttons
         btnZero = findViewById(R.id.Zero)
         btnOne = findViewById(R.id.One)
         btnTwo = findViewById(R.id.Two)
@@ -61,7 +56,6 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
         btnEight = findViewById(R.id.Eight)
         btnNine = findViewById(R.id.Nine)
 
-        // Operation buttons
         btnAdd = findViewById(R.id.Addi)
         btnSubtract = findViewById(R.id.Subtr)
         btnMultiply = findViewById(R.id.X)
@@ -70,12 +64,10 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
         btnDecimal = findViewById(R.id.Decimal)
         btnToggleSign = findViewById(R.id.Toggle)
 
-        // Control buttons
         btnClear = findViewById(R.id.Clear)
         btnCE = findViewById(R.id.CE)
         btnBackspace = findViewById(R.id.BS)
 
-        // Set click listeners
         btnZero.setOnClickListener(this)
         btnOne.setOnClickListener(this)
         btnTwo.setOnClickListener(this)
@@ -102,7 +94,7 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            // Number buttons
+
             R.id.Zero -> appendNumber("0")
             R.id.One -> appendNumber("1")
             R.id.Two -> appendNumber("2")
@@ -114,7 +106,6 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
             R.id.Eight -> appendNumber("8")
             R.id.Nine -> appendNumber("9")
 
-            // Decimal point
             R.id.Decimal -> {
                 if (currentInput.contains(".").not()) {
                     if (currentInput.isEmpty()) {
@@ -126,7 +117,6 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
                 }
             }
 
-            // Toggle sign
             R.id.Toggle -> {
                 if (currentInput.isNotEmpty() && currentInput != "0") {
                     currentInput = if (currentInput.startsWith("-")) {
@@ -138,16 +128,13 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
                 }
             }
 
-            // Operator buttons
             R.id.Addi -> setOperator("+")
             R.id.Subtr -> setOperator("-")
             R.id.X -> setOperator("×")
             R.id.Divide -> setOperator("÷")
 
-            // Equals button
             R.id.Equals -> calculateResult()
 
-            // Clear buttons
             R.id.Clear -> clearAll()
             R.id.CE -> clearEntry()
             R.id.BS -> backspace()
@@ -180,7 +167,7 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
             shouldResetInput = true
             updateOperationDisplay()
         } else if (currentOperator.isNotEmpty()) {
-            // Allow changing the operator if no new number has been entered
+
             currentOperator = operator
             updateOperationDisplay()
         }
@@ -207,7 +194,7 @@ class MainActivity : ComponentActivity(), View.OnClickListener {
         currentInput = if (result == "Error") {
             "Error"
         } else {
-            // Remove .0 if it's an integer
+
             if (result == result.toString()) {
                 result.toString()
             } else {
